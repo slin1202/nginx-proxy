@@ -47,7 +47,7 @@ If you need to support multipe virtual hosts for a container, you can separate e
       -e ROOT_PASSWORD=R00t.p455w0rd                        # API root password is R00t.p455w0rd 
       -v /path/to/media:/media \                            # Media files are stored locally in /path/to/media
       --link mongodb:mongodb \                              # API is linked to this MongoDB instance
-      --name camomile_api camomile/server                 
+      --name camomile_api camomile/api                 
 
 #### Camomile Touch Web App (at camomile.fr/touch)
 
