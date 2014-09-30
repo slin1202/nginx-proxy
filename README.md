@@ -39,25 +39,26 @@ If you need to support multipe virtual hosts for a container, you can separate e
 #### Camomile REST API (at camomile.fr/api)
 
     $ docker run -d \
-             -v /path/to/the/database:/data/db \   # 
-             --name mongodb dockerfile/mongodb
+      -v /path/to/the/database:/data/db \                   # Database is stored locally in /path/to/the/database 
+      --name mongodb dockerfile/mongodb
                     
     $ docker run -d \
-             -e VIRTUAL_HOST=camomile.fr -e VIRTUAL_PATH=api \   # nginx-proxy redirects from camomile.fr/api
-             -e ROOT_PASSWORD=R00t.p455w0rd                      # API root password is R00t.p455w0rd 
-             -v /path/to/media:/media \                          # Media files are stored locally in /path/to/media
-             --link mongodb:mongodb \                            # API is linked to this MongoDB instance
-             --name camomile_api camomile/server                 
+      -e VIRTUAL_HOST=camomile.fr -e VIRTUAL_PATH=api \     # nginx-proxy redirects from camomile.fr/api
+      -e ROOT_PASSWORD=R00t.p455w0rd                        # API root password is R00t.p455w0rd 
+      -v /path/to/media:/media \                            # Media files are stored locally in /path/to/media
+      --link mongodb:mongodb \                              # API is linked to this MongoDB instance
+      --name camomile_api camomile/server                 
 
 #### Camomile Touch Web App (at camomile.fr/touch)
 
     $ docker run -d \
-             -e VIRTUAL_HOST=camomile.fr -e VIRTUAL_PATH=touch \   # nginx-proxy redirects from camomile.fr/touch
-             -e CAMOMILE_API=camomile.fr/api \                     # Web app speaks with API at camomile.fr/api 
-             --name camomile_touch camomile/touch
+      -e VIRTUAL_HOST=camomile.fr -e VIRTUAL_PATH=touch \   # nginx-proxy redirects from camomile.fr/touch
+      -e CAMOMILE_API=camomile.fr/api \                     # Web app speaks with API at camomile.fr/api 
+      --name camomile_touch camomile/touch
 
 #### Camomile Admin Web App (at camomile.fr/admin)
 
-    $ docker run -d -e VIRTUAL_HOST=camomile.fr -e VIRTUAL_PATH=admin \  # nginx-proxy redirects from camomile.fr/admin
-                    -e CAMOMILE_API=camomile.fr/api \                    # Wep app speaks with API at camomile.fr/api
-                    --name camomile_admin camomile/admin
+    $ docker run -d \
+      -e VIRTUAL_HOST=camomile.fr -e VIRTUAL_PATH=admin \   # nginx-proxy redirects from camomile.fr/admin
+      -e CAMOMILE_API=camomile.fr/api \                     # Wep app speaks with API at camomile.fr/api
+      --name camomile_admin camomile/admin
