@@ -21,7 +21,7 @@ server {
     {{ $location := $value.Env.VIRTUAL_PATH }}
 
 
-    location /{{ $location }}/ {
+    location {{ $location }} {
     	include /etc/nginx/proxy_params;
     	proxy_redirect off;
         proxy_http_version 1.1;
